@@ -6,59 +6,97 @@
     <title>Dice Roller</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Poppins', sans-serif;
             text-align: center;
-            background-color: #f5f5f5;
+            background: linear-gradient(135deg, #89f7fe, #66a6ff);
             margin: 0;
             padding: 0;
             display: flex;
             flex-direction: column;
             justify-content: center;
+            align-items: center;
             height: 100vh;
         }
         .container {
             background: #ffffff;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            width: 300px;
-            margin: auto;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+            width: 350px;
+            text-align: center;
+            animation: fadeIn 1s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         h1 {
-            color: #333;
+            color: #4CAF50;
+            font-size: 2rem;
+            margin-bottom: 20px;
         }
         button {
-            padding: 10px 20px;
-            font-size: 16px;
-            color: #fff;
+            padding: 12px 24px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #ffffff;
             background: #4CAF50;
             border: none;
-            border-radius: 8px;
+            border-radius: 50px;
             cursor: pointer;
-            margin-top: 20px;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
         button:hover {
             background: #45a049;
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
         }
         #result {
             margin-top: 20px;
-            font-size: 24px;
-            color: #555;
+            font-size: 1.5rem;
+            color: #333333;
+            font-weight: bold;
+            animation: pop 0.3s ease-in-out;
+        }
+        @keyframes pop {
+            from {
+                transform: scale(0.8);
+            }
+            to {
+                transform: scale(1);
+            }
+        }
+        footer {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #ffffff;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Roll the Dice</h1>
+        <h1>🎲 Roll the Dice 🎲</h1>
         <button onclick="rollDice()">Roll</button>
         <div id="result"></div>
     </div>
+    <footer>
+        Made with ❤️ by Dice Enthusiasts
+    </footer>
 
     <script>
         async function rollDice() {
             const response = await fetch('/roll');
             const data = await response.json();
-            document.getElementById('result').innerText = `You rolled a ${data.result}!`;
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerText = `You rolled a ${data.result}`;
+            resultDiv.style.animation = 'pop 0.3s ease-in-out';
         }
     </script>
 </body>
